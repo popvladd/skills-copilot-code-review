@@ -17,6 +17,10 @@
       <h2>Extracurricular Activities</h2>
       <div id="user-controls">
         <div id="user-status">
+          <button id="announcements-button" class="icon-button hidden">
+            <span class="user-icon">📢</span>
+            <span>Announcements</span>
+          </button>
           <button id="login-button" class="icon-button">
             <span class="user-icon">👤</span>
             <span>Login</span>
@@ -28,6 +32,9 @@
         </div>
       </div>
     </header>
+
+    <!-- Active announcements, loaded from the API -->
+    <section id="announcements-banner" class="announcements-banner hidden" aria-label="School announcements"></section>
 
     <main>
       <section id="activities-container">
@@ -131,6 +138,79 @@
           <button type="submit">Login</button>
         </form>
         <div id="login-message" class="hidden message"></div>
+      </div>
+    </div>
+
+    <!-- Announcements Management Modal -->
+    <div id="announcements-modal" class="modal hidden">
+      <div class="modal-content modal-content-wide">
+        <span class="close-announcements-modal" role="button" aria-label="Close">&times;</span>
+        <h3>Manage Announcements</h3>
+        <p class="modal-subtitle">
+          Announcements appear on the home page between their start date and expiration date.
+        </p>
+
+        <div class="announcements-manager">
+          <div class="announcements-list-panel">
+            <div class="panel-header">
+              <h4>Existing announcements</h4>
+              <button type="button" id="new-announcement-button" class="secondary-button">
+                + New
+              </button>
+            </div>
+            <div id="announcements-list">
+              <p class="empty-state">Loading announcements...</p>
+            </div>
+          </div>
+
+          <div class="announcement-form-panel">
+            <h4 id="announcement-form-title">Add announcement</h4>
+            <form id="announcement-form">
+              <input type="hidden" id="announcement-id" value="" />
+              <div class="form-group">
+                <label for="announcement-title">Title</label>
+                <input
+                  type="text"
+                  id="announcement-title"
+                  maxlength="120"
+                  required
+                  placeholder="e.g. Spring Concert Rehearsal"
+                />
+              </div>
+              <div class="form-group">
+                <label for="announcement-message">Message</label>
+                <textarea
+                  id="announcement-message"
+                  rows="4"
+                  maxlength="1000"
+                  required
+                  placeholder="Share the details students and staff need to know..."
+                ></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="announcement-start">
+                    Start date <span class="label-hint">(optional)</span>
+                  </label>
+                  <input type="datetime-local" id="announcement-start" />
+                </div>
+                <div class="form-group">
+                  <label for="announcement-expiration">
+                    Expiration date <span class="label-required">*</span>
+                  </label>
+                  <input type="datetime-local" id="announcement-expiration" required />
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" id="save-announcement-button">Save announcement</button>
+                <button type="button" id="cancel-announcement-button" class="secondary-button">
+                  Cancel
+                </button>
+              </div>
+            </form>
+            <div id="announcement-message-box" class="hidden message"></div>
+          </div>
+        </div>
       </div>
     </div>
 
